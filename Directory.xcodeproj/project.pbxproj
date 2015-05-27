@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		ABC539851B1628B6000C8F88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC539841B1628B6000C8F88 /* AppDelegate.swift */; };
-		ABC539871B1628B6000C8F88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC539861B1628B6000C8F88 /* ViewController.swift */; };
 		ABC5398A1B1628B6000C8F88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC539881B1628B6000C8F88 /* Main.storyboard */; };
 		ABC5398C1B1628B6000C8F88 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC5398B1B1628B6000C8F88 /* Images.xcassets */; };
 		ABC5398F1B1628B6000C8F88 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABC5398D1B1628B6000C8F88 /* LaunchScreen.xib */; };
 		ABC5399B1B1628B6000C8F88 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5399A1B1628B6000C8F88 /* DirectoryTests.swift */; };
+		ABC539A71B162B77000C8F88 /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC539A61B162B77000C8F88 /* SchoolViewController.swift */; };
+		ABC539AC1B162BB2000C8F88 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC539AB1B162BB2000C8F88 /* School.swift */; };
+		ABC539AE1B162BCE000C8F88 /* SchoolsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC539AD1B162BCE000C8F88 /* SchoolsTableViewCell.swift */; };
+		ABC539B01B162DD3000C8F88 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC539AF1B162DD3000C8F88 /* Contact.swift */; };
+		ABC539B21B1630A5000C8F88 /* SchoolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC539B11B1630A5000C8F88 /* SchoolsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +33,17 @@
 		ABC5397F1B1628B6000C8F88 /* Directory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Directory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC539831B1628B6000C8F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABC539841B1628B6000C8F88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ABC539861B1628B6000C8F88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ABC539891B1628B6000C8F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ABC5398B1B1628B6000C8F88 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ABC5398E1B1628B6000C8F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		ABC539941B1628B6000C8F88 /* DirectoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DirectoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC539991B1628B6000C8F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABC5399A1B1628B6000C8F88 /* DirectoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
+		ABC539A61B162B77000C8F88 /* SchoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolViewController.swift; sourceTree = "<group>"; };
+		ABC539AB1B162BB2000C8F88 /* School.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
+		ABC539AD1B162BCE000C8F88 /* SchoolsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolsTableViewCell.swift; sourceTree = "<group>"; };
+		ABC539AF1B162DD3000C8F88 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		ABC539B11B1630A5000C8F88 /* SchoolsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +85,10 @@
 		ABC539811B1628B6000C8F88 /* Directory */ = {
 			isa = PBXGroup;
 			children = (
+				ABC539AA1B162B90000C8F88 /* Controller */,
+				ABC539A91B162B8A000C8F88 /* View */,
+				ABC539A81B162B83000C8F88 /* Model */,
 				ABC539841B1628B6000C8F88 /* AppDelegate.swift */,
-				ABC539861B1628B6000C8F88 /* ViewController.swift */,
 				ABC539881B1628B6000C8F88 /* Main.storyboard */,
 				ABC5398B1B1628B6000C8F88 /* Images.xcassets */,
 				ABC5398D1B1628B6000C8F88 /* LaunchScreen.xib */,
@@ -110,6 +120,32 @@
 				ABC539991B1628B6000C8F88 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ABC539A81B162B83000C8F88 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ABC539AB1B162BB2000C8F88 /* School.swift */,
+				ABC539AF1B162DD3000C8F88 /* Contact.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		ABC539A91B162B8A000C8F88 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ABC539AD1B162BCE000C8F88 /* SchoolsTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		ABC539AA1B162B90000C8F88 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ABC539A61B162B77000C8F88 /* SchoolViewController.swift */,
+				ABC539B11B1630A5000C8F88 /* SchoolsTableViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,8 +248,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABC539871B1628B6000C8F88 /* ViewController.swift in Sources */,
+				ABC539B21B1630A5000C8F88 /* SchoolsTableViewController.swift in Sources */,
+				ABC539B01B162DD3000C8F88 /* Contact.swift in Sources */,
+				ABC539AE1B162BCE000C8F88 /* SchoolsTableViewCell.swift in Sources */,
 				ABC539851B1628B6000C8F88 /* AppDelegate.swift in Sources */,
+				ABC539A71B162B77000C8F88 /* SchoolViewController.swift in Sources */,
+				ABC539AC1B162BB2000C8F88 /* School.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
