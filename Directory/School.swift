@@ -14,9 +14,9 @@ class School: NSObject {
     var address: String?
     var phoneNumber: String?
     var enrollment: Int?
-    var contacts: [String] = []
+    var contacts: [Contact] = []
     
-    init(n :String, a :String, p :String, e :Int) {
+    init(n :String, a :String, p :String, e :Int, c:[Contact]) {
         name = n
         address = a
         phoneNumber = p

@@ -12,6 +12,15 @@ class Contact: NSObject {
     var firstName: String?
     var lastName: String?
     var position: String?
-    var school: NSNumber?
+//    var picture
     
+    init(f :String, l :String, p :String) {
+        firstName = f
+        lastName = l
+        position = p
+    }
+    
+    func setupLayout() {
+        
+    }
 }

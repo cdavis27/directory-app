@@ -44,7 +44,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="All Schools" id="AY6-Ya-dOR">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="action" id="Q0B-ZY-FYo"/>
+                        <barButtonItem key="leftBarButtonItem" image="address" style="plain" id="Q0B-ZY-FYo"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fkq-IN-htV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -61,10 +61,10 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BdG-6H-9i1">
                                 <rect key="frame" x="0.0" y="231" width="320" height="337"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="gvS-Nt-LtX">
-                                    <rect key="frame" x="0.0" y="130" width="320" height="0.0"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="OFn-vE-Vd2" customClass="ContactView" customModule="Directory" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="130" width="320" height="132"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
@@ -90,22 +90,6 @@
                                     <outlet property="dataSource" destination="CKa-OF-Jxa" id="mke-oj-Sd9"/>
                                 </connections>
                             </tableView>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="76L-vo-K17">
-                                <rect key="frame" x="10" y="10" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="76L-vo-K17" id="ePg-xh-qUP">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Dcf-I9-TCR">
-                                <rect key="frame" x="20" y="20" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dcf-I9-TCR" id="l30-Vy-I8U">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="TcQ-Cs-IQ7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="294"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -134,6 +118,7 @@
                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
                     </navigationBar>
@@ -146,6 +131,9 @@
             <point key="canvasLocation" x="-291" y="405"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="address" width="29" height="29"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

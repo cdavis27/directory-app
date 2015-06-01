@@ -16,12 +16,15 @@ class SchoolsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // navigation bar
-        self.navigationItem.title = "Schools"
+        self.navigationItem.title = "SCHOOLS"
         
-        let school1 = School(n:"Mountain View", a:"Orem, Utah", p:"801-651-3294", e:1100)
-        let school2 = School(n:"American Fork High", a:"American Fork, Utah", p:"801-651-3294", e:1300)
-        let school3 = School(n:"Prove High", a:"Provo, Utah", p:"801-651-3294", e:2000)
-        let school4 = School(n:"Lone Peak", a:"Alpine, Utah", p:"801-651-3294", e:900)
+        let contact = Contact(f:"Parker", l:"Lusk", p:"Principal")
+        let contacts: [Contact] = [contact]
+        
+        let school1 = School(n:"Mountain View", a:"Orem, Utah", p:"801-651-3294", e:1100, c:contacts)
+        let school2 = School(n:"American Fork High", a:"American Fork, Utah", p:"801-651-3294", e:1300, c:contacts)
+        let school3 = School(n:"Prove High", a:"Provo, Utah", p:"801-651-3294", e:2000, c:contacts)
+        let school4 = School(n:"Lone Peak", a:"Alpine, Utah", p:"801-651-3294", e:900, c:contacts)
         
         // load data from API
         self.schoolsArray += [school1 , school2, school3, school4]
@@ -88,7 +91,8 @@ class SchoolsTableViewController: UITableViewController {
             let index = tableView.indexPathForSelectedRow()
             let vc = segue.destinationViewController as! SchoolViewController
             vc.currentSchool = self.schoolsArray[index!.row]
-    
+//            self.navigationItem.title = ""
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         }
     }
 }

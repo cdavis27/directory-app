@@ -21,7 +21,7 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var seenError : Bool = false
     var locationFixAchieved : Bool = false
     var locationStatus : NSString = "Not Started"
-    
+
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
     
@@ -29,17 +29,18 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         
         self.navigationItem.title = self.currentSchool.name
-        
-//        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-//        centerMapOnLocation(initialLocation)
-        
         self.initLocationManager()
+        
+        // contacts
+//        let contactView = ContactView(contact: self.currentSchool.contacts[0])
+        
+        // centers map on users location, need to change to show users location and school location
+        centerMapOnLocation(locationManager.location)
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // Mark: Location Manager
