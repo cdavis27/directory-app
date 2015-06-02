@@ -10,16 +10,17 @@ import UIKit
 
 class School: NSObject {
     
-    var name: String?
-    var address: String?
-    var phoneNumber: String?
-    var enrollment: Int?
+    var name: String!
+    var address: String!
+    var phoneNumber: String!
+    var enrollment: Int!
     var contacts: [Contact] = []
     
     init(n :String, a :String, p :String, e :Int, c:[Contact]) {
-        name = n
-        address = a
-        phoneNumber = p
-        enrollment = e
+        self.name = n
+        self.address = a
+        self.phoneNumber = p
+        self.enrollment = e
+        self.contacts = c
     }
 }

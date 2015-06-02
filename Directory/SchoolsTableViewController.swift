@@ -18,16 +18,20 @@ class SchoolsTableViewController: UITableViewController {
         // navigation bar
         self.navigationItem.title = "SCHOOLS"
         
-        let contact = Contact(f:"Parker", l:"Lusk", p:"Principal")
-        let contacts: [Contact] = [contact]
+        let contact1 = Contact(f:"Parker", l:"Lusk", p:"Principal", i:"http://cdmlipowa.pl/wp-content/uploads/2014/03/Person-icon-grey.jpg")
+        let contact2 = Contact(f:"Candice", l:"Davis", p:"Principal",i:"")
+        let contacts1: [Contact] = [contact1, contact2]
+        let contacts2: [Contact] = [contact1]
         
-        let school1 = School(n:"Mountain View", a:"Orem, Utah", p:"801-651-3294", e:1100, c:contacts)
-        let school2 = School(n:"American Fork High", a:"American Fork, Utah", p:"801-651-3294", e:1300, c:contacts)
-        let school3 = School(n:"Prove High", a:"Provo, Utah", p:"801-651-3294", e:2000, c:contacts)
-        let school4 = School(n:"Lone Peak", a:"Alpine, Utah", p:"801-651-3294", e:900, c:contacts)
+        let school1 = School(n:"Mountain View", a:"848 W 260 S Orem, UT, 84058", p:"801-651-3294", e:1100, c:contacts1)
+        let school2 = School(n:"American Fork High", a:"American Fork, UT", p:"801-651-3294", e:1300, c:contacts2)
+        let school3 = School(n:"Prove High", a:"Provo, UT, USA", p:"801-651-3294", e:2000, c:contacts1)
+        let school4 = School(n:"Lone Peak", a:"Alpine, UT, USA", p:"801-651-3294", e:900, c:contacts2)
         
         // load data from API
         self.schoolsArray += [school1 , school2, school3, school4]
+        // sorts schools alphabetically by school name
+        schoolsArray.sort({ $0.name < $1.name })
        
     }
 

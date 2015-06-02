@@ -17,14 +17,25 @@ class ContactView: UIView {
     
     var contact: Contact!
     
-    convenience init(contact: Contact!) {
-        self.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    convenience init(contact: Contact!, ypos: Int!) {
+        self.init(frame: CGRect(x: 0, y: ypos, width: 320, height:88))
+        xibSetup()
+        
         self.contact = contact
-        self.name.text = contact.firstName! + " " + contact.lastName!
+        self.image.layer.cornerRadius = self.image.frame.size.width / 2
+        self.image.clipsToBounds = true
+        
+        self.name.text = contact.firstName + " " + contact.lastName
         self.position.text = contact.position
         
-        NSBundle.mainBundle().loadNibNamed("ContactView", owner: self, options: nil)
-        
+        // checks if there is a img, else uses default
+        if(self.contact.picture != "") {
+            if let checkedUrl = NSURL(string: self.contact.picture) {
+                downloadImage(checkedUrl)
+            }
+        } else {
+            self.image.image = UIImage(named: "monster")
+        }
     }
     
     override init(frame: CGRect) {
@@ -33,26 +44,31 @@ class ContactView: UIView {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        NSBundle.mainBundle().loadNibNamed("ContactView", owner: self, options: nil)
-        self.addSubview(self.view)
+        xibSetup()
         
         self.image.layer.cornerRadius = self.image.frame.size.width / 2
         self.image.clipsToBounds = true
     }
     
-//    func xibSetup() {
-//        self.view = loadViewFromNib()
-//        
-//        // use bounds not frame or it'll be offset
-//        view.frame = bounds
-//        
-//        // Make the view stretch with containing view
-//        view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
-//        
-//        // Adding custom subview on top of our view (over any custom drawing > see note below)
-//        self.addSubview(self.view);
-//    }
+    func xibSetup() {
+        NSBundle.mainBundle().loadNibNamed("ContactView", owner: self, options: nil)
+        self.view.frame = bounds
+        self.view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        self.addSubview(self.view)
+    }
     
-
+    // Asynchronously downloads contact picture
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: NSData(data: data))
+            }.resume()
+    }
+    
+    func downloadImage(url:NSURL){
+        getDataFromUrl(url) { data in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.image.image = UIImage(data: data!)
+            }
+        }
+    }
 }
