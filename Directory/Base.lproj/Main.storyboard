@@ -49,7 +49,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fkq-IN-htV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="407"/>
+            <point key="canvasLocation" x="145" y="405"/>
         </scene>
         <!--School View Controller-->
         <scene sceneID="iOy-Lm-hhV">
@@ -63,17 +63,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="TcQ-Cs-IQ7">
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsPointsOfInterest="NO" id="TcQ-Cs-IQ7">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="239"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="CKa-OF-Jxa" id="wy3-I8-Lpo"/>
+                                        </connections>
                                     </mapView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tlN-ix-dsn">
-                                        <rect key="frame" x="44" y="294" width="268" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enrollment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c0e-ol-Ghq">
                                         <rect key="frame" x="44" y="330" width="268" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -100,6 +96,18 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9n4-Ho-kII">
+                                        <rect key="frame" x="44" y="292" width="268" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Phone">
+                                            <color key="titleColor" red="0.1960784314" green="0.20784313730000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="0.1960784314" green="0.20784313730000001" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="callPhone:" destination="CKa-OF-Jxa" eventType="touchUpInside" id="jEx-8G-c0o"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="CKa-OF-Jxa" id="Qtt-k4-Xp1"/>
@@ -113,7 +121,7 @@
                         <outlet property="addressLabel" destination="ue8-Fq-JTq" id="bVQ-Q8-QTS"/>
                         <outlet property="enrollmentLabel" destination="c0e-ol-Ghq" id="WYd-pa-cdo"/>
                         <outlet property="mapView" destination="TcQ-Cs-IQ7" id="SFF-13-m7a"/>
-                        <outlet property="phoneLabel" destination="tlN-ix-dsn" id="teV-e8-1nD"/>
+                        <outlet property="phoneButton" destination="9n4-Ho-kII" id="vrF-yM-wO2"/>
                         <outlet property="scrollView" destination="y4b-6U-ber" id="Pn8-Cs-xqO"/>
                     </connections>
                 </viewController>

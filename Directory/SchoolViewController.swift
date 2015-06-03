@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import AddressBook
 import CoreLocation
 
 class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
@@ -27,7 +28,7 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var enrollmentLabel: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var addressLabel: UILabel!
     
     override func viewDidLoad() {
@@ -35,18 +36,14 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         self.navigationItem.title = self.currentSchool.name
         self.initLocationManager()
-        // centers map on users location, need to change to show users location and school location
-//        centerMapOnLocation(locationManager.location)
-        
-        // sets up labels and contactViews
         self.addressLabel.text = self.currentSchool.address
-        self.phoneLabel.text = self.currentSchool.phoneNumber
+        self.phoneButton.setTitle(self.currentSchool.phoneNumber, forState: UIControlState.Normal)
         self.enrollmentLabel.text = toString(self.currentSchool.enrollment!)
+        
         createContactViews()
+        self.scrollView.contentSize = view.frame.size
         
         locateSchool()
-
-        self.scrollView.contentSize = view.frame.size
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,29 +111,92 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     // MARK: MapView
     
-    func centerMapOnLocation(location: CLLocation) {
-//        var zoomRect = MKMapRectNull
-//        var myLocationPointRect = MKMapRectMake(myLocation.longitude, myLocation.latitude, 0, 0)
-//        var currentDestinationPointRect = MKMapRectMake(currentDestination.longitude, currentDestination.latitude, 0, 0)
-//        
-//        zoomRect = myLocationPointRect
-//        zoomRect = MKMapRectUnion(zoomRect, currentDestinationPointRect)
-//        
-//        self.mapView.setVisibleMapRect(zoomRect,true)
-//        
-//        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-//            regionRadius * 2.0, regionRadius * 2.0)
-//        mapView.setRegion(coordinateRegion, animated: true)
-    }
     
     func locateSchool() {
         var geocoder = CLGeocoder()
         geocoder.geocodeAddressString(self.currentSchool.address, completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             if let placemark = placemarks?[0] as? CLPlacemark {
-                self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
+                
+                var coordinates:CLLocationCoordinate2D = placemark.location.coordinate
+                var pointAnnotation:MKPointAnnotation = MKPointAnnotation()
+                pointAnnotation.coordinate = coordinates
+                pointAnnotation.title = self.currentSchool.name
+                self.mapView?.addAnnotation(pointAnnotation)
+                self.mapView?.centerCoordinate = coordinates
+                self.mapView?.selectAnnotation(pointAnnotation, animated: true)
+                
+                self.centerMap()
             }
         })
     }
+    
+    func mapView (mapView: MKMapView!,
+        viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+            if(annotation.isEqual(self.mapView.userLocation)) {
+                return nil
+            }
+            var pinView:MKPinAnnotationView = MKPinAnnotationView()
+            pinView.annotation = annotation
+            pinView.pinColor = MKPinAnnotationColor.Green
+            pinView.animatesDrop = true
+            pinView.canShowCallout = true
+            let button = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+//            let button   = UIButton.buttonWithType(UIButtonType.System) as UIButton
+//            button.frame = CGRectMake(100, 100, 100, 100)
+//            button.setImage(image, forState: .Normal)
+            button.addTarget(self, action: "openMapForPlace:", forControlEvents:.TouchUpInside)
+            
+            
+            pinView.rightCalloutAccessoryView = button
+            
+            return pinView
+    }
+    
+    func mapView(mapView: MKMapView!,
+        didSelectAnnotationView view: MKAnnotationView!){
+
+    }
+    
+    func centerMap() {
+        var zoomRect = MKMapRectNull
+        for annotation in self.mapView.annotations as! [MKAnnotation] {
+            let annotationPoint = MKMapPointForCoordinate(annotation.coordinate)
+            let annotationRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.9, 0.9)
+            zoomRect = MKMapRectUnion(zoomRect, annotationRect)
+        }
+        self.mapView.setVisibleMapRect(zoomRect, animated: true)
+        
+    }
+    
+    // this is broken, I need to pass it the annotations coords
+    @IBAction func openMapForPlace(sender: AnyObject) {
+        
+        var lat1 : NSString = "40.111"
+        var lng1 : NSString = "111.668"
+        
+        var latitute:CLLocationDegrees =  lat1.doubleValue
+        var longitute:CLLocationDegrees =  lng1.doubleValue
+        
+        let regionDistance:CLLocationDistance = 10000
+        var coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        var options = [
+            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+        ]
+        var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        var mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = self.currentSchool.name
+        mapItem.openInMapsWithLaunchOptions(options)
+        
+    }
+    
+    // MARK: Phone
+    
+    @IBAction func callPhone(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://" + self.currentSchool.phoneNumber)!)
+    }
+    
 
     // MARK: TableView
     
@@ -163,15 +223,5 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
 //    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 //        
 //    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -23,10 +23,10 @@ class SchoolsTableViewController: UITableViewController {
         let contacts1: [Contact] = [contact1, contact2]
         let contacts2: [Contact] = [contact1]
         
-        let school1 = School(n:"Mountain View", a:"848 W 260 S Orem, UT, 84058", p:"801-651-3294", e:1100, c:contacts1)
-        let school2 = School(n:"American Fork High", a:"American Fork, UT", p:"801-651-3294", e:1300, c:contacts2)
-        let school3 = School(n:"Prove High", a:"Provo, UT, USA", p:"801-651-3294", e:2000, c:contacts1)
-        let school4 = School(n:"Lone Peak", a:"Alpine, UT, USA", p:"801-651-3294", e:900, c:contacts2)
+        let school1 = School(n:"Mountain View", a:"848 W 260 S Orem, UT, 84058", p:"8016513642", e:1100, c:contacts1)
+        let school2 = School(n:"American Fork High", a:"American Fork, UT", p:"8016513642", e:1300, c:contacts2)
+        let school3 = School(n:"Prove High", a:"Provo, UT, USA", p:"8016513642", e:2000, c:contacts1)
+        let school4 = School(n:"Lone Peak", a:"Alpine, UT, USA", p:"8016513642", e:900, c:contacts2)
         
         // load data from API
         self.schoolsArray += [school1 , school2, school3, school4]
