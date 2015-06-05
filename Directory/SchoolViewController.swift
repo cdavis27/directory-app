@@ -14,6 +14,7 @@ import CoreLocation
 class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     var currentSchool: School!
+    var schoolCoords: CLLocationCoordinate2D!
     var regionRadius: CLLocationDistance = 1000
     var lastLocation = CLLocation()
     var locationAuthorizationStatus:CLAuthorizationStatus!
@@ -117,17 +118,28 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         geocoder.geocodeAddressString(self.currentSchool.address, completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             if let placemark = placemarks?[0] as? CLPlacemark {
                 
-                var coordinates:CLLocationCoordinate2D = placemark.location.coordinate
+                self.schoolCoords = placemark.location.coordinate
                 var pointAnnotation:MKPointAnnotation = MKPointAnnotation()
-                pointAnnotation.coordinate = coordinates
+                pointAnnotation.coordinate = self.schoolCoords
                 pointAnnotation.title = self.currentSchool.name
                 self.mapView?.addAnnotation(pointAnnotation)
-                self.mapView?.centerCoordinate = coordinates
+//                self.mapView?.centerCoordinate = self.schoolCoords
                 self.mapView?.selectAnnotation(pointAnnotation, animated: true)
                 
                 self.centerMap()
             }
         })
+    }
+    
+    func centerMap() {
+        var zoomRect = MKMapRectNull
+        for annotation in self.mapView.annotations as! [MKAnnotation] {
+            let annotationPoint = MKMapPointForCoordinate(annotation.coordinate)
+            let annotationRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.9, 0.9)
+            zoomRect = MKMapRectUnion(zoomRect, annotationRect)
+        }
+        self.mapView.setVisibleMapRect(zoomRect, animated: true)
+        
     }
     
     func mapView (mapView: MKMapView!,
@@ -157,40 +169,21 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
 
     }
     
-    func centerMap() {
-        var zoomRect = MKMapRectNull
-        for annotation in self.mapView.annotations as! [MKAnnotation] {
-            let annotationPoint = MKMapPointForCoordinate(annotation.coordinate)
-            let annotationRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.9, 0.9)
-            zoomRect = MKMapRectUnion(zoomRect, annotationRect)
-        }
-        self.mapView.setVisibleMapRect(zoomRect, animated: true)
-        
-    }
-    
-    // this is broken, I need to pass it the annotations coords
     @IBAction func openMapForPlace(sender: AnyObject) {
-        
-        var lat1 : NSString = "40.111"
-        var lng1 : NSString = "111.668"
-        
-        var latitute:CLLocationDegrees =  lat1.doubleValue
-        var longitute:CLLocationDegrees =  lng1.doubleValue
-        
+      
         let regionDistance:CLLocationDistance = 10000
-        var coordinates = CLLocationCoordinate2DMake(latitute, longitute)
-        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+
+        let regionSpan = MKCoordinateRegionMakeWithDistance(self.schoolCoords, regionDistance, regionDistance)
         var options = [
             MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
             MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
         ]
-        var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        var placemark = MKPlacemark(coordinate: self.schoolCoords, addressDictionary: nil)
         var mapItem = MKMapItem(placemark: placemark)
         mapItem.name = self.currentSchool.name
         mapItem.openInMapsWithLaunchOptions(options)
-        
     }
-    
+
     // MARK: Phone
     
     @IBAction func callPhone(sender: AnyObject) {
