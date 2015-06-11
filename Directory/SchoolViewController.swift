@@ -25,7 +25,6 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     var locationStatus : NSString = "Not Started"
     var coords: CLLocationCoordinate2D?
     
-    // @IBOutlet var tableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var enrollmentLabel: UILabel!
@@ -52,7 +51,7 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     }
     
     func createContactViews() {
-        var ypos = 370
+        var ypos = 319
         for contact in self.currentSchool.contacts {
             let contactView = ContactView(contact: contact, ypos: ypos)
             self.scrollView.addSubview(contactView)
@@ -135,7 +134,7 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         var zoomRect = MKMapRectNull
         for annotation in self.mapView.annotations as! [MKAnnotation] {
             let annotationPoint = MKMapPointForCoordinate(annotation.coordinate)
-            let annotationRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.9, 0.9)
+            let annotationRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1)
             zoomRect = MKMapRectUnion(zoomRect, annotationRect)
         }
         self.mapView.setVisibleMapRect(zoomRect, animated: true)
@@ -157,7 +156,6 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
 //            button.frame = CGRectMake(100, 100, 100, 100)
 //            button.setImage(image, forState: .Normal)
             button.addTarget(self, action: "openMapForPlace:", forControlEvents:.TouchUpInside)
-            
             
             pinView.rightCalloutAccessoryView = button
             
