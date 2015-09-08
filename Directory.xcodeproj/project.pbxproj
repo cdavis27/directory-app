@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32DFAD2F1B8D183900251DA1 /* DirectoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DFAD2E1B8D183900251DA1 /* DirectoryService.swift */; };
+		32DFAD311B8D187100251DA1 /* NetworkOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DFAD301B8D187100251DA1 /* NetworkOperations.swift */; };
+		32DFAD351B8E2A4100251DA1 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DFAD341B8E2A4100251DA1 /* Locksmith.swift */; };
+		32DFAD371B8E2A9200251DA1 /* LocksmithRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DFAD361B8E2A9200251DA1 /* LocksmithRequest.swift */; };
+		32DFAD3D1B8E312500251DA1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DFAD3C1B8E312500251DA1 /* LoginViewController.swift */; };
+		32DFAD411B8E3A3600251DA1 /* TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DFAD401B8E3A3600251DA1 /* TokenService.swift */; };
 		AB037E2A1B1D11980041F792 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB037E291B1D11980041F792 /* ContactView.swift */; };
 		AB037E2C1B1D1D9E0041F792 /* ContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB037E2B1B1D1D9E0041F792 /* ContactView.xib */; };
 		ABC539851B1628B6000C8F88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC539841B1628B6000C8F88 /* AppDelegate.swift */; };
@@ -32,6 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		32DFAD2E1B8D183900251DA1 /* DirectoryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryService.swift; sourceTree = "<group>"; };
+		32DFAD301B8D187100251DA1 /* NetworkOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperations.swift; sourceTree = "<group>"; };
+		32DFAD341B8E2A4100251DA1 /* Locksmith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locksmith.swift; sourceTree = "<group>"; };
+		32DFAD361B8E2A9200251DA1 /* LocksmithRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithRequest.swift; sourceTree = "<group>"; };
+		32DFAD3C1B8E312500251DA1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		32DFAD401B8E3A3600251DA1 /* TokenService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenService.swift; sourceTree = "<group>"; };
 		AB037E291B1D11980041F792 /* ContactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		AB037E2B1B1D1D9E0041F792 /* ContactView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactView.xib; sourceTree = "<group>"; };
 		ABC5397F1B1628B6000C8F88 /* Directory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Directory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32DFAD3F1B8E39C200251DA1 /* Locksmith */ = {
+			isa = PBXGroup;
+			children = (
+				32DFAD361B8E2A9200251DA1 /* LocksmithRequest.swift */,
+				32DFAD341B8E2A4100251DA1 /* Locksmith.swift */,
+			);
+			name = Locksmith;
+			sourceTree = "<group>";
+		};
 		ABC539761B1628B6000C8F88 = {
 			isa = PBXGroup;
 			children = (
@@ -89,13 +110,17 @@
 		ABC539811B1628B6000C8F88 /* Directory */ = {
 			isa = PBXGroup;
 			children = (
+				32DFAD3F1B8E39C200251DA1 /* Locksmith */,
 				ABC539AA1B162B90000C8F88 /* Controller */,
 				ABC539A91B162B8A000C8F88 /* View */,
 				ABC539A81B162B83000C8F88 /* Model */,
-				ABC539841B1628B6000C8F88 /* AppDelegate.swift */,
+				32DFAD401B8E3A3600251DA1 /* TokenService.swift */,
+				32DFAD2E1B8D183900251DA1 /* DirectoryService.swift */,
+				32DFAD301B8D187100251DA1 /* NetworkOperations.swift */,
 				ABC539881B1628B6000C8F88 /* Main.storyboard */,
 				ABC5398B1B1628B6000C8F88 /* Images.xcassets */,
 				ABC5398D1B1628B6000C8F88 /* LaunchScreen.xib */,
+				ABC539841B1628B6000C8F88 /* AppDelegate.swift */,
 				ABC539821B1628B6000C8F88 /* Supporting Files */,
 			);
 			path = Directory;
@@ -150,6 +175,7 @@
 			children = (
 				ABC539A61B162B77000C8F88 /* SchoolViewController.swift */,
 				ABC539B11B1630A5000C8F88 /* SchoolsTableViewController.swift */,
+				32DFAD3C1B8E312500251DA1 /* LoginViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -256,12 +282,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABC539B21B1630A5000C8F88 /* SchoolsTableViewController.swift in Sources */,
+				32DFAD351B8E2A4100251DA1 /* Locksmith.swift in Sources */,
+				32DFAD311B8D187100251DA1 /* NetworkOperations.swift in Sources */,
+				32DFAD371B8E2A9200251DA1 /* LocksmithRequest.swift in Sources */,
+				32DFAD411B8E3A3600251DA1 /* TokenService.swift in Sources */,
 				ABC539B01B162DD3000C8F88 /* Contact.swift in Sources */,
 				ABC539AE1B162BCE000C8F88 /* SchoolsTableViewCell.swift in Sources */,
 				ABC539851B1628B6000C8F88 /* AppDelegate.swift in Sources */,
 				AB037E2A1B1D11980041F792 /* ContactView.swift in Sources */,
 				ABC539A71B162B77000C8F88 /* SchoolViewController.swift in Sources */,
 				ABC539AC1B162BB2000C8F88 /* School.swift in Sources */,
+				32DFAD3D1B8E312500251DA1 /* LoginViewController.swift in Sources */,
+				32DFAD2F1B8D183900251DA1 /* DirectoryService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

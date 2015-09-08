@@ -36,7 +36,7 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         self.navigationItem.title = self.currentSchool.name
         self.initLocationManager()
-        self.addressLabel.text = self.currentSchool.address
+        self.addressLabel.text = self.createAddress()
         self.phoneButton.setTitle(self.currentSchool.phoneNumber, forState: UIControlState.Normal)
         self.enrollmentLabel.text = toString(self.currentSchool.enrollment!)
         
@@ -113,8 +113,10 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     
     func locateSchool() {
+        var address: String
+        address = self.createAddress()
         var geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(self.currentSchool.address, completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+        geocoder.geocodeAddressString(address, completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             if let placemark = placemarks?[0] as? CLPlacemark {
                 
                 self.schoolCoords = placemark.location.coordinate
@@ -128,6 +130,16 @@ class SchoolViewController: UIViewController, MKMapViewDelegate, CLLocationManag
                 self.centerMap()
             }
         })
+    }
+    
+    func createAddress() -> String {
+        var school = self.currentSchool
+        var address = school.address["street"]!
+//            school.address["city"] + " " +
+//            school.address["state"] + " " +
+//            school.address["zip"]
+        
+        return address
     }
     
     func centerMap() {
