@@ -24,8 +24,8 @@ class SchoolsTableViewController: UITableViewController {
         // load data from API
         let directoryService = DirectoryService()
         directoryService.getDirectory(token) {
-            (let schools) in
-//            self.schoolsArray = schools
+            (let schools: [String: AnyObject]) in
+            self.schoolsArray = schools
         }
     }
 
@@ -39,7 +39,7 @@ class SchoolsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
         cell.textLabel?.text = self.schoolsArray[indexPath.row].name
         return cell
     }
@@ -47,7 +47,7 @@ class SchoolsTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toSchoolView" {
-            let index = tableView.indexPathForSelectedRow()
+            let index = tableView.indexPathForSelectedRow
             let vc = segue.destinationViewController as! SchoolViewController
             vc.currentSchool = self.schoolsArray[index!.row]
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)

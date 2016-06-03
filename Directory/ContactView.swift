@@ -42,7 +42,7 @@ class ContactView: UIView {
         super.init(frame: frame)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         xibSetup()
         
@@ -53,14 +53,14 @@ class ContactView: UIView {
     func xibSetup() {
         NSBundle.mainBundle().loadNibNamed("ContactView", owner: self, options: nil)
         self.view.frame = bounds
-        self.view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        self.view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         self.addSubview(self.view)
     }
     
     // Asynchronously downloads contact picture
     func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
-            completion(data: NSData(data: data))
+            completion(data: NSData(data: data!))
             }.resume()
     }
     

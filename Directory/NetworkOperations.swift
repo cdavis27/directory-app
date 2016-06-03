@@ -38,13 +38,13 @@ class NetworkOperation {
                 switch httpResponse.statusCode {
                 case 200:
                     // 2. Create JSON object with data
-                    let jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [String: AnyObject]
+                    let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? [String: AnyObject]
                     completion(jsonDictionary)
                 default:
-                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                    print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
                 }
             } else {
-                println("Error: Not a valid HTTP response")
+                print("Error: Not a valid HTTP response")
             }
         }
         
@@ -54,24 +54,65 @@ class NetworkOperation {
     func downloadJSONFromURL(token: String, completion: JSONDictionaryCompletion) {
         let request = NSMutableURLRequest(URL: queryURL)
         request.addValue(token, forHTTPHeaderField: "x-access-token")
-        let dataTask = session.dataTaskWithRequest(request) {
-            (let data, let response, let error) in
+        
+        
+        // Excute HTTP Request
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
             
-            // 1. Check HTTP response for successful GET request
-            if let httpResponse = response as? NSHTTPURLResponse {
-                switch httpResponse.statusCode {
-                case 200:
-                    // 2. Create JSON object with data
-                    let jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [String: AnyObject]
-                    completion(jsonDictionary)
-                default:
-                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
-                }
-            } else {
-                println("Error: Not a valid HTTP response")
+            // Check for error
+            if error != nil
+            {
+                print("error=\(error)")
+                return
             }
+            
+            // Print out response string
+            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print("responseString = \(responseString)")
+            
+            
+            // Convert server json response to NSDictionary
+            do {
+                if let convertedJsonIntoDict = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
+                    
+                    // Print out dictionary
+                    print(convertedJsonIntoDict)
+                    
+                    // Get value by key
+                    let firstNameValue = convertedJsonIntoDict["userName"] as? String
+                    print(firstNameValue!)
+                    
+                }
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+            
         }
         
-        dataTask.resume()
+        task.resume()
+
+        
+        
+//        let dataTask = session.dataTaskWithRequest(request) {
+//            (let data, let response, let error) in
+//            
+//            // 1. Check HTTP response for successful GET request
+//            if let httpResponse = response as? NSHTTPURLResponse {
+//                switch httpResponse.statusCode {
+//                case 200:
+//                    // 2. Create JSON object with data
+//                    var data = httpResponse.data
+//                    let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as! [String: AnyObject]
+//                    completion(jsonDictionary)
+//                default:
+//                    print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+//                }
+//            } else {
+//                print("Error: Not a valid HTTP response")
+//            }
+//        }
+        
+//        dataTask.resume()
     }
 }

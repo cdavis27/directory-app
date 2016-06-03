@@ -24,14 +24,14 @@ struct TokenService {
             let networkOperation = NetworkOperation(url: directoryURL)
             
             networkOperation.post(username, password: password) {
-                (var JSONDictionary) in
+                (let JSONDictionary) in
                 let currentToken = self.currentTokenFromJSONDictionary(JSONDictionary!)
-                println(currentToken)
+                print(currentToken)
                 completion(currentToken)
             }
             
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -39,7 +39,7 @@ struct TokenService {
         if let token = jsonDictionary["token"] as! String! {
             return token
         } else {
-            println("JSON dictionary returned nil for token key")
+            print("JSON dictionary returned nil for token key")
             return ""
         }
     }

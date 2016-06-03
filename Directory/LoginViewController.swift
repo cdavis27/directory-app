@@ -19,20 +19,20 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let e = Locksmith.deleteDataForUserAccount(self.tokenKey)
-        let (dictionary, error) = Locksmith.loadDataForUserAccount(tokenKey)
+        _ = Locksmith.deleteDataForUserAccount(self.tokenKey)
+        let (dictionary, _) = Locksmith.loadDataForUserAccount(tokenKey)
         if(dictionary != nil) {
             self.performSegueWithIdentifier("toSchoolsView", sender: self)
         }
     }
     
     @IBAction func loginButtonTapped(sender: AnyObject) {
-        let tokenService = TokenService(newUsername: username.text, newPassword: password.text)
+        let tokenService = TokenService(newUsername: username.text!, newPassword: password.text!)
         tokenService.getToken() {
             (let newToken) in
             if(newToken != ""){
                 self.token = newToken
-                let error = Locksmith.saveData([self.tokenKey: self.token], forUserAccount: self.tokenKey)
+                _ = Locksmith.saveData([self.tokenKey: self.token], forUserAccount: self.tokenKey)
                 dispatch_async(dispatch_get_main_queue()){
                     self.performSegueWithIdentifier("toSchoolsView", sender:self)
                 }
@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toSchoolsView" {
             let vc = segue.destinationViewController as! SchoolsTableViewController
-            let (dictionary, error) = Locksmith.loadDataForUserAccount(tokenKey)
+            let (_,_) = Locksmith.loadDataForUserAccount(tokenKey)
             vc.token = token
         }
     }

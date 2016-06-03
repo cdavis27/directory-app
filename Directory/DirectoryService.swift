@@ -10,7 +10,8 @@ import Foundation
 
 struct DirectoryService {
     
-    func getDirectory(token: String, completion: (String -> Void)) {
+    
+    func getDirectory(token: String, completion: ([String: AnyObject] -> Void)) {
         
         if let directoryURL = NSURL(string: "http://directory.tomjacksonphoto.com/api/schools") {
             let networkOperation = NetworkOperation(url: directoryURL)
@@ -18,20 +19,20 @@ struct DirectoryService {
             networkOperation.downloadJSONFromURL(token) {
                 (let JSONDictionary) in
                 let currentDirectory = self.currentDirectoryFromJSONDictionary(JSONDictionary)
-                println(currentDirectory)
-                completion("done")
+//                print(currentDirectory)
+                completion(currentDirectory)
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
-    func currentDirectoryFromJSONDictionary(jsonDictionary: [String: AnyObject]?) -> String {
-        if let currentDirectoryDictionary = jsonDictionary!["schools"] as? [String: [AnyObject]] {
-            return "done"
+    func currentDirectoryFromJSONDictionary(jsonDictionary: [String: AnyObject]?) -> [String: AnyObject] {
+        if (jsonDictionary!["schools"] as? [String: [AnyObject]]) != nil {
+            return jsonDictionary!
         } else {
-            println("JSON dictionary returned nil for schools key")
-            return "done"
+            print("JSON dictionary returned nil for schools key")
+            return jsonDictionary!
         }
     }
 }
